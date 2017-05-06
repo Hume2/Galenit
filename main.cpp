@@ -17,8 +17,10 @@
 #include "main.h"
 
 #include "graphics/voxel.h"
+#include "mesh/chunk.h"
 
-ToeColour clr(Colour(1, 0, 0), Colour(1, 0, 0));
+ToeColour clr(Colour(1, 1, 1), Colour(0, 1, 0));
+Chunk ch;
 float rot = 0;
 
 /* ascii code for the escape key */
@@ -55,7 +57,7 @@ void ReSizeGLScene(int Width, int Height)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,100.0f);
+  gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,1000.0f);
   glMatrixMode(GL_MODELVIEW);
 }
 
@@ -65,10 +67,11 @@ void DrawGLScene()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
   glLoadIdentity();				// Reset The View
 
-  glTranslatef(-1.5f,-1.0f,-4.0f);
   glRotatef(rot, 0, 1, 0);
+  glTranslatef(-15.0f,-15.0f,-15.0f);
 
-  voxel::drawToe(clr);
+  //voxel::drawToe(clr);
+  ch.draw(clr);
 
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();

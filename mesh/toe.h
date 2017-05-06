@@ -13,6 +13,8 @@ class Toe
     ToeColour colour;
 
     void draw(Point3D pos);
+
+    static void draw_it(ToeColour c, Point3D pos);
 };
 
 #endif // MESH_TOE_H
