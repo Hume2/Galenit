@@ -16,7 +16,8 @@
 
 #include "graphics/voxel.h"
 
-ToeColour clr(Colour(1, 0, 0), Colour(1, 0, 0));
+ToeColour clr(Colour(1, 0, 0), Colour(1, 1, 0));
+float rot = 0;
 
 /* ascii code for the escape key */
 #define ESCAPE 27
@@ -63,11 +64,14 @@ void DrawGLScene()
   glLoadIdentity();				// Reset The View
 
   glTranslatef(-1.5f,-1.0f,-4.0f);
+  glRotatef(rot, 0, 1, 0);
 
   voxel::drawToe(clr);
 
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();
+
+  rot += 0.4;
 }
 
 /* The function called whenever a key is pressed. */
