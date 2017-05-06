@@ -1,9 +1,11 @@
 #ifndef GRAPHICS_VOXEL_H
 #define GRAPHICS_VOXEL_H
 
+#include "colour.h"
+
 namespace voxel {
 
-void drawToe();
+void drawToe(const ToeColour c);
 
 }
 

@@ -6,6 +6,9 @@
 // Visit me at www.demonews.com/hosted/nehe 
 // (email Richard Campbell at ulmont@bellsouth.net)
 //
+#include <ctime>
+#include <random>
+
 #include <GL/glut.h>    // Header File For The GLUT Library 
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
 #include <GL/glu.h>	// Header File For The GLu32 Library
@@ -73,7 +76,7 @@ void DrawGLScene()
   glVertex3f( 1.0f,-1.0f, 0.0f);// Pravý dolní bod
   glVertex3f(-1.0f,-1.0f, 0.0f);// Levý dolní bod
   glEnd();// Konec kreslení obdélníků*/
-  voxel::drawToe();
+  voxel::drawToe(ToeColour(Colour(1, 0, 0), Colour(0, 1, 0)));
 
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();
@@ -97,7 +100,9 @@ void keyPressed(unsigned char key, int x, int y)
 }
 
 int main(int argc, char **argv) 
-{  
+{
+  srandom(time(0));
+
   /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
      X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */
   glutInit(&argc, argv);
