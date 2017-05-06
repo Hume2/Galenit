@@ -1,5 +1,5 @@
-#ifndef COLOUR_H
-#define COLOUR_H
+#ifndef GRAPHICS_COLOUR_H
+#define GRAPHICS_COLOUR_H
 
 #include <array>
 #include <random>
@@ -21,10 +21,13 @@ class Colour
     Colour operator+(const Colour a) const;
     Colour& operator+=(const Colour a);
 
+    Colour operator*(const Colour a) const;
+    Colour& operator*=(const Colour a);
+
     static std::default_random_engine generator;
 };
 
-//TOE = Truncated OctaahEdron
+//TOE = Truncated OctahEdron
 //česky KOT -u m. neživ. (Komolý OsmisTěn)
 
 class ToeColour
@@ -45,6 +48,12 @@ class ToeColour
     ToeColour& set_colour(std::array<Colour, 8> hexagon, std::array<Colour, 6> quad);
 
     ToeColour& noise(const Colour c, bool bound);
+
+    ToeColour operator+(const ToeColour a) const;
+    ToeColour& operator+=(const ToeColour a);
+
+    ToeColour operator*(const ToeColour a) const;
+    ToeColour& operator*=(const ToeColour a);
 };
 
-#endif // COLOUR_H
+#endif // GRAPHICS_COLOUR_H

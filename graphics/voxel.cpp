@@ -111,12 +111,9 @@ namespace voxel {
 
   void drawToe(const ToeColour c) {
     for (int i = 7; i >= 0; i--) {
-      //glColor4f(1.0f, 0.0f, 1.0f/7*i, 0.0f);
-      //Colour(1.0f, 0.0f, 1.0f/7*i).use();
       drawToeHexagon(i, c);
     }
     for (int i = 5; i >= 0; i--) {
-      //Colour(0.0f, 1.0f, 1.0f/5*i).use();
       drawToeQuad(i, c);
     }
   }

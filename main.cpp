@@ -14,6 +14,8 @@
 #include <GL/glu.h>	// Header File For The GLu32 Library
 #include <unistd.h>     // Header file for sleeping.
 
+#include "main.h"
+
 #include "graphics/voxel.h"
 
 ToeColour clr(Colour(1, 0, 0), Colour(1, 0, 0));
@@ -108,7 +110,7 @@ int main(int argc, char **argv)
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
 
   /* get a 640 x 480 window */
-  glutInitWindowSize(640, 480);
+  glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
   /* the window starts at the upper left corner of the screen */
   glutInitWindowPosition(0, 0);

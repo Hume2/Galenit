@@ -70,6 +70,21 @@ Colour& Colour::operator +=(const Colour a) {
   return *this;
 }
 
+Colour Colour::operator *(const Colour a) const {
+  return Colour(r * a.r, g * a.g, b * a.b);
+}
+
+Colour& Colour::operator *=(const Colour a) {
+  r *= a.r;
+  g *= a.g;
+  b *= a.b;
+  return *this;
+}
+
+//------------------------------------------------------------------------------
+// Toe Colour
+//------------------------------------------------------------------------------
+
 ToeColour::ToeColour():
   hexagons(),
   quads()
@@ -195,7 +210,6 @@ ToeColour& ToeColour::noise(const Colour c, bool bound) {
       delta.g = dist_g(Colour::generator);
       delta.b = dist_b(Colour::generator);
     }
-    //Colour delta(dist_r(Colour::generator), dist_g(Colour::generator), dist_b(Colour::generator));
 
     hexagons[p[i][0]][p[i][3]] += delta;
     hexagons[p[i][0]][p[i][3]].cap();
@@ -211,5 +225,63 @@ ToeColour& ToeColour::noise(const Colour c, bool bound) {
     hexagons[i][0].randomize(c, bound);
   }
 
+  return *this;
+}
+
+ToeColour ToeColour::operator+(const ToeColour a) const {
+  ToeColour result;
+  for (int i = 7; i >= 0; i--) {
+    for (int j = 6; j >= 0; j--) {
+      result.hexagons[i][j] = hexagons[i][j] + a.hexagons[i][j];
+    }
+  }
+  for (int i = 5; i >= 0; i--) {
+    for (int j = 3; j >= 0; j--) {
+      result.quads[i][j] = quads[i][j] + a.quads[i][j];
+    }
+  }
+  return result;
+}
+
+ToeColour ToeColour::operator*(const ToeColour a) const {
+  ToeColour result;
+  for (int i = 7; i >= 0; i--) {
+    for (int j = 6; j >= 0; j--) {
+      result.hexagons[i][j] = hexagons[i][j] * a.hexagons[i][j];
+    }
+  }
+  for (int i = 5; i >= 0; i--) {
+    for (int j = 3; j >= 0; j--) {
+      result.quads[i][j] = quads[i][j] * a.quads[i][j];
+    }
+  }
+  return result;
+}
+
+ToeColour& ToeColour::operator+=(const ToeColour a) {
+  for (int i = 7; i >= 0; i--) {
+    for (int j = 6; j >= 0; j--) {
+      hexagons[i][j] += a.hexagons[i][j];
+    }
+  }
+  for (int i = 5; i >= 0; i--) {
+    for (int j = 3; j >= 0; j--) {
+      quads[i][j] += a.quads[i][j];
+    }
+  }
+  return *this;
+}
+
+ToeColour& ToeColour::operator*=(const ToeColour a) {
+  for (int i = 7; i >= 0; i--) {
+    for (int j = 6; j >= 0; j--) {
+      hexagons[i][j] *= a.hexagons[i][j];
+    }
+  }
+  for (int i = 5; i >= 0; i--) {
+    for (int j = 3; j >= 0; j--) {
+      quads[i][j] *= a.quads[i][j];
+    }
+  }
   return *this;
 }
