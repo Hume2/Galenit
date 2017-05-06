@@ -14,7 +14,7 @@ class Colour
 
     void cap();
 
-    Colour& randomize(const Colour noise);
+    Colour& randomize(const Colour noise, bool bound);
 
     void use() const;
 
@@ -44,7 +44,7 @@ class ToeColour
     ToeColour& set_colour(std::array<Colour, 14> faces);
     ToeColour& set_colour(std::array<Colour, 8> hexagon, std::array<Colour, 6> quad);
 
-    ToeColour& noise(const Colour c);
+    ToeColour& noise(const Colour c, bool bound);
 };
 
 #endif // COLOUR_H

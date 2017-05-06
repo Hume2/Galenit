@@ -94,7 +94,7 @@ void keyPressed(unsigned char key, int x, int y)
 int main(int argc, char **argv) 
 {
   srandom(time(0));
-  clr.noise(Colour(0.5, 1.0, 0.0));
+  clr.noise(Colour(0.5, 1.0, 0.0), true);
 
   /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
      X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */

@@ -33,16 +33,22 @@ void Colour::cap() {
   b = std::max(b, 0.0f);
 }
 
-Colour& Colour::randomize(const Colour noise) {
-  //std::default_random_engine generator;
+Colour& Colour::randomize(const Colour noise, bool bound) {
+  std::uniform_real_distribution<float> dist_r(-noise.r, noise.r);
 
-  std::uniform_real_distribution<float> dist_r(r - noise.r, r + noise.r);
-  std::uniform_real_distribution<float> dist_g(g - noise.g, g + noise.g);
-  std::uniform_real_distribution<float> dist_b(b - noise.b, b + noise.b);
+  if (bound) {
+    float d = dist_r(generator);
+    r += d;
+    g += d;
+    b += d;
+  } else {
+    std::uniform_real_distribution<float> dist_g(-noise.g, noise.g);
+    std::uniform_real_distribution<float> dist_b(-noise.b, noise.b);
 
-  r = dist_r(generator);
-  g = dist_g(generator);
-  b = dist_b(generator);
+    r += dist_r(generator);
+    g += dist_g(generator);
+    b += dist_b(generator);
+  }
 
   cap();
 
@@ -146,7 +152,7 @@ ToeColour& ToeColour::set_colour(std::array<Colour, 8> hexagon, std::array<Colou
   return *this;
 }
 
-ToeColour& ToeColour::noise(const Colour c) {
+ToeColour& ToeColour::noise(const Colour c, bool bound) {
   const char p[24][5] = { //hexagon, hexxagon, quad, verticle6, verticle4
     {0,2,1,1,0},
     {0,2,5,2,1},
@@ -179,7 +185,17 @@ ToeColour& ToeColour::noise(const Colour c) {
   std::uniform_real_distribution<float> dist_b(-c.b, c.b);
 
   for (int i = 23; i >= 0; i--) {
-    Colour delta(dist_r(Colour::generator), dist_g(Colour::generator), dist_b(Colour::generator));
+    Colour delta;
+    if (bound) {
+      delta.r = dist_r(Colour::generator);
+      delta.g = delta.r;
+      delta.b = delta.r;
+    } else {
+      delta.r = dist_r(Colour::generator);
+      delta.g = dist_g(Colour::generator);
+      delta.b = dist_b(Colour::generator);
+    }
+    //Colour delta(dist_r(Colour::generator), dist_g(Colour::generator), dist_b(Colour::generator));
 
     hexagons[p[i][0]][p[i][3]] += delta;
     hexagons[p[i][0]][p[i][3]].cap();
@@ -192,7 +208,7 @@ ToeColour& ToeColour::noise(const Colour c) {
   }
 
   for (int i = 7; i >= 0; i--) {
-    hexagons[i][0].randomize(c);
+    hexagons[i][0].randomize(c, bound);
   }
 
   return *this;
