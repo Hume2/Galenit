@@ -2,6 +2,7 @@
 #define COLOUR_H
 
 #include <array>
+#include <random>
 
 class Colour
 {
@@ -16,6 +17,11 @@ class Colour
     Colour& randomize(const Colour noise);
 
     void use() const;
+
+    Colour operator+(const Colour a) const;
+    Colour& operator+=(const Colour a);
+
+    static std::default_random_engine generator;
 };
 
 //TOE = Truncated OctaahEdron
@@ -37,6 +43,8 @@ class ToeColour
     ToeColour& set_colour(const Colour hexagon, const Colour quad);
     ToeColour& set_colour(std::array<Colour, 14> faces);
     ToeColour& set_colour(std::array<Colour, 8> hexagon, std::array<Colour, 6> quad);
+
+    ToeColour& noise(const Colour c);
 };
 
 #endif // COLOUR_H

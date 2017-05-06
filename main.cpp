@@ -16,6 +16,8 @@
 
 #include "graphics/voxel.h"
 
+ToeColour clr(Colour(1, 0, 0), Colour(1, 0, 0));
+
 /* ascii code for the escape key */
 #define ESCAPE 27
 
@@ -60,23 +62,9 @@ void DrawGLScene()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
   glLoadIdentity();				// Reset The View
 
-  glTranslatef(-1.5f,0.0f,-6.0f);
+  glTranslatef(-1.5f,-1.0f,-4.0f);
 
-  /*glBegin(GL_TRIANGLES);// Začátek kreslení trojúhelníků
-  glVertex3f( 0.0f, 1.0f, 0.0f);// Horní bod
-  glVertex3f(-1.0f,-1.0f, 0.0f);// Levý dolní bod
-  glVertex3f( 1.0f,-1.0f, 0.0f);// Pravý dolní bod
-  glEnd();// Ukončení kreslení trojúhelníků
-
-  glTranslatef(3.0f,0.0f,0.0f);// Posun o 3 jednotky doprava
-
-  glBegin(GL_QUADS);// Začátek kreslení obdélníků
-  glVertex3f(-1.0f, 1.0f, 0.0f);// Levý horní bod
-  glVertex3f( 1.0f, 1.0f, 0.0f);// Pravý horní bod
-  glVertex3f( 1.0f,-1.0f, 0.0f);// Pravý dolní bod
-  glVertex3f(-1.0f,-1.0f, 0.0f);// Levý dolní bod
-  glEnd();// Konec kreslení obdélníků*/
-  voxel::drawToe(ToeColour(Colour(1, 0, 0), Colour(0, 1, 0)));
+  voxel::drawToe(clr);
 
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();
@@ -102,6 +90,7 @@ void keyPressed(unsigned char key, int x, int y)
 int main(int argc, char **argv) 
 {
   srandom(time(0));
+  clr.noise(Colour(0.5, 0.5, 0.5));
 
   /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
      X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */
