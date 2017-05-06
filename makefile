@@ -1,4 +1,4 @@
-SOURCES = $(wildcard *.cpp)
+SOURCES = $(wildcard *.cpp) $(wildcard graphics/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 DEPS = $(SOURCES:%.cpp=%.d)
 TARGET = galenit

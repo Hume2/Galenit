@@ -11,6 +11,8 @@
 #include <GL/glu.h>	// Header File For The GLu32 Library
 #include <unistd.h>     // Header file for sleeping.
 
+#include "graphics/voxel.h"
+
 /* ascii code for the escape key */
 #define ESCAPE 27
 
@@ -55,6 +57,24 @@ void DrawGLScene()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
   glLoadIdentity();				// Reset The View
 
+  glTranslatef(-1.5f,0.0f,-6.0f);
+
+  /*glBegin(GL_TRIANGLES);// Začátek kreslení trojúhelníků
+  glVertex3f( 0.0f, 1.0f, 0.0f);// Horní bod
+  glVertex3f(-1.0f,-1.0f, 0.0f);// Levý dolní bod
+  glVertex3f( 1.0f,-1.0f, 0.0f);// Pravý dolní bod
+  glEnd();// Ukončení kreslení trojúhelníků
+
+  glTranslatef(3.0f,0.0f,0.0f);// Posun o 3 jednotky doprava
+
+  glBegin(GL_QUADS);// Začátek kreslení obdélníků
+  glVertex3f(-1.0f, 1.0f, 0.0f);// Levý horní bod
+  glVertex3f( 1.0f, 1.0f, 0.0f);// Pravý horní bod
+  glVertex3f( 1.0f,-1.0f, 0.0f);// Pravý dolní bod
+  glVertex3f(-1.0f,-1.0f, 0.0f);// Levý dolní bod
+  glEnd();// Konec kreslení obdélníků*/
+  voxel::drawToe();
+
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();
 }
@@ -62,44 +82,44 @@ void DrawGLScene()
 /* The function called whenever a key is pressed. */
 void keyPressed(unsigned char key, int x, int y) 
 {
-    /* avoid thrashing this procedure */
-    usleep(100);
+  /* avoid thrashing this procedure */
+  usleep(100);
 
-    /* If escape is pressed, kill everything. */
-    if (key == ESCAPE) 
-    { 
-	/* shut down our window */
-	glutDestroyWindow(window); 
-	
-	/* exit the program...normal termination. */
-	exit(0);                   
-    }
+  /* If escape is pressed, kill everything. */
+  if (key == ESCAPE)
+  {
+    /* shut down our window */
+    glutDestroyWindow(window);
+
+    /* exit the program...normal termination. */
+    exit(0);
+  }
 }
 
 int main(int argc, char **argv) 
 {  
-  /* Initialize GLUT state - glut will take any command line arguments that pertain to it or 
-     X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */  
-  glutInit(&argc, argv);  
+  /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
+     X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */
+  glutInit(&argc, argv);
 
-  /* Select type of Display mode:   
-     Double buffer 
+  /* Select type of Display mode:
+     Double buffer
      RGBA color
-     Alpha components supported 
-     Depth buffer */  
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);  
+     Alpha components supported
+     Depth buffer */
+  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
 
   /* get a 640 x 480 window */
-  glutInitWindowSize(640, 480);  
+  glutInitWindowSize(640, 480);
 
   /* the window starts at the upper left corner of the screen */
-  glutInitWindowPosition(0, 0);  
+  glutInitWindowPosition(0, 0);
 
-  /* Open a window */  
-  window = glutCreateWindow("Jeff Molofee's GL Code Tutorial ... NeHe '99");  
+  /* Open a window */
+  window = glutCreateWindow("Jeff Molofee's GL Code Tutorial ... NeHe '99");
 
   /* Register the function to do all our OpenGL drawing. */
-  glutDisplayFunc(&DrawGLScene);  
+  glutDisplayFunc(&DrawGLScene);
 
   /* Go fullscreen.  This is as soon as possible. */
   glutFullScreen();
@@ -116,8 +136,8 @@ int main(int argc, char **argv)
   /* Initialize our window. */
   InitGL(640, 480);
   
-  /* Start Event Processing Engine */  
-  glutMainLoop();  
+  /* Start Event Processing Engine */
+  glutMainLoop();
 
   return 1;
 }
