@@ -7,6 +7,9 @@
 
 class Point3D;
 
+class Cubepos;
+class Toepos;
+
 class Point2D
 {
   public:
@@ -41,6 +44,8 @@ class Point3D
     Point3D();
     Point3D(const double x_, const double y_, const double z_);
     Point3D(const Point2D p);
+    Point3D(const Cubepos p);
+    Point3D(const Toepos p);
 
     double x, y, z;
 

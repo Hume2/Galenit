@@ -1,5 +1,5 @@
-#ifndef TOEPOS_H
-#define TOEPOS_H
+#ifndef MESH_TOEPOS_H
+#define MESH_TOEPOS_H
 
 class Point3D;
 
@@ -7,7 +7,7 @@ class Toepos
 {
   public:
     enum Mesh{ASW, ZOT};
-    enum Dir{ZERO, LEFT, RIGHT, DOWN, UP, FRONT, BACK, LDF, LDB, LUF, LUB, RDF, RDB, RUF, RUB};
+    enum Dir{ZERO, BACK, FRONT, UP, DOWN, RIGHT, LEFT, RUB, LUB, RDB, LDB, RUF, LUF, RDF, LDF};
 
     Toepos();
     Toepos(int x_, int y_, int z_, Mesh mesh_);
@@ -24,21 +24,21 @@ namespace dir{
   const Toepos def[15] = {
     /*ZERO =*/ {0, 0, 0, Toepos::ASW},
 
-    /*LEFT  =*/ {-1, 0, 0, Toepos::ASW},
-    /*RIGHT =*/ { 1, 0, 0, Toepos::ASW},
-    /*DOWN  =*/ { 0,-1, 0, Toepos::ASW},
-    /*UP    =*/ { 0, 1, 0, Toepos::ASW},
-    /*FRONT =*/ { 0, 0,-1, Toepos::ASW},
     /*BACK  =*/ { 0, 0, 1, Toepos::ASW},
+    /*FRONT =*/ { 0, 0,-1, Toepos::ASW},
+    /*UP    =*/ { 0, 1, 0, Toepos::ASW},
+    /*DOWN  =*/ { 0,-1, 0, Toepos::ASW},
+    /*RIGHT =*/ { 1, 0, 0, Toepos::ASW},
+    /*LEFT  =*/ {-1, 0, 0, Toepos::ASW},
 
-    /*LDF =*/ {-1,-1,-1, Toepos::ZOT},
-    /*LDB =*/ {-1,-1, 0, Toepos::ZOT},
-    /*LUF =*/ {-1, 0,-1, Toepos::ZOT},
-    /*LUB =*/ {-1, 0, 0, Toepos::ZOT},
-    /*RDF =*/ { 0,-1,-1, Toepos::ZOT},
-    /*RDB =*/ { 0,-1, 0, Toepos::ZOT},
-    /*RUF =*/ { 0, 0,-1, Toepos::ZOT},
     /*RUB =*/ { 0, 0, 0, Toepos::ZOT},
+    /*LUB =*/ {-1, 0, 0, Toepos::ZOT},
+    /*RDB =*/ { 0,-1, 0, Toepos::ZOT},
+    /*LDB =*/ {-1,-1, 0, Toepos::ZOT},
+    /*RUF =*/ { 0, 0,-1, Toepos::ZOT},
+    /*LUF =*/ {-1, 0,-1, Toepos::ZOT},
+    /*RDF =*/ { 0,-1,-1, Toepos::ZOT},
+    /*LDF =*/ {-1,-1,-1, Toepos::ZOT},
   };
 
   const Toepos::Dir up[5]    = {Toepos::UP,    Toepos::LUB, Toepos::RUB, Toepos::RUF, Toepos::LUF};
@@ -56,24 +56,6 @@ namespace dir{
   const Toepos::Dir rdb[7] = {Toepos::RDB, Toepos::RIGHT, Toepos::DOWN, Toepos::BACK,  Toepos::RUB, Toepos::LDB, Toepos::RDF};
   const Toepos::Dir ruf[7] = {Toepos::RUF, Toepos::RIGHT, Toepos::UP,   Toepos::FRONT, Toepos::RUB, Toepos::RDF, Toepos::LUF};
   const Toepos::Dir rub[7] = {Toepos::RUB, Toepos::RIGHT, Toepos::UP,   Toepos::FRONT, Toepos::LUB, Toepos::RDB, Toepos::RUF};
-
-  /*const Toepos ZERO = {0, 0, 0, Toepos::ASW};
-
-  const Toepos LEFT  = {-1, 0, 0, Toepos::ASW};
-  const Toepos RIGHT = { 1, 0, 0, Toepos::ASW};
-  const Toepos DOWN  = { 0,-1, 0, Toepos::ASW};
-  const Toepos UP    = { 0, 1, 0, Toepos::ASW};
-  const Toepos FRONT = { 0, 0,-1, Toepos::ASW};
-  const Toepos BACK  = { 0, 0, 1, Toepos::ASW};
-
-  const Toepos LDF = {-1,-1,-1, Toepos::ZOT};
-  const Toepos LDB = {-1,-1, 0, Toepos::ZOT};
-  const Toepos LUF = {-1, 0,-1, Toepos::ZOT};
-  const Toepos LUB = {-1, 0, 0, Toepos::ZOT};
-  const Toepos RDF = { 0,-1,-1, Toepos::ZOT};
-  const Toepos RDB = { 0,-1, 0, Toepos::ZOT};
-  const Toepos RUF = { 0, 0,-1, Toepos::ZOT};
-  const Toepos RUB = { 0, 0, 0, Toepos::ZOT};*/
 }
 
-#endif // TOEPOS_H
+#endif // MESH_TOEPOS_H

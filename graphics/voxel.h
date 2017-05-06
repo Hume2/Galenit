@@ -6,6 +6,7 @@
 namespace voxel {
 
 void drawToe(const ToeColour c);
+void drawToeFace(int n, const ToeColour c);
 
 }
 

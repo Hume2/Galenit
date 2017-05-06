@@ -2,8 +2,10 @@
 
 #include "point.h"
 
+#include "cubepos.h"
+#include "toepos.h"
+
 #include "../main.h"
-//#include "../plot/renderer.h"
 
 Point2D::Point2D() :
   x(0),
@@ -101,6 +103,26 @@ Point3D::Point3D(const Point2D p) :
   y(p.y),
   z(0)
 { }
+
+Point3D::Point3D(const Cubepos p) :
+  x(p.x),
+  y(p.y),
+  z(p.z)
+{
+
+}
+
+Point3D::Point3D(const Toepos p) :
+  x(p.x),
+  y(p.y),
+  z(p.z)
+{
+  if (p.mesh == Toepos::ZOT) {
+    x += 0.5f;
+    y += 0.5f;
+    z += 0.5f;
+  }
+}
 
 Point3D Point3D::operator +(const Point3D a) const {
   return Point3D(x + a.x, y + a.y, z + a.z);

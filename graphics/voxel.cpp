@@ -117,4 +117,12 @@ namespace voxel {
       drawToeQuad(i, c);
     }
   }
+
+  void drawToeFace(int n, const ToeColour c) {
+    if (n <= 6) {
+      drawToeQuad(n-1, c);
+    } else {
+      drawToeHexagon(n-7, c);
+    }
+  }
 }
