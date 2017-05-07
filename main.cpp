@@ -28,6 +28,22 @@ float rot = 60;
 
 GLuint texture[1];
 
+bool light = false;// Světlo ON/OFF
+bool lp;// Stisknuto L?
+bool fp;// Stisknuto F?
+
+GLfloat xrot;// X Rotace
+GLfloat yrot;// Y Rotace
+GLfloat xspeed;// Rychlost x rotace
+GLfloat yspeed;// Rychlost y rotace
+GLfloat z = -15.0f;// Hloubka v obrazovce
+
+GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f };// Okolní světlo
+GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f };// Přímé světlo
+GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };// Pozice světla
+
+GLuint filter;// Specifikuje používaný texturový filtr
+
 /* ascii code for the escape key */
 #define ESCAPE 27
 
@@ -145,7 +161,7 @@ bool LoadGLTextures() {
   glBindTexture(GL_TEXTURE_2D, texture[0]);   // 2d texture (x and y size)
 
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR); // scale linearly when image bigger than texture
-  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR); // scale linearly when image smalled than texture
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST); // scale linearly when image smalled than texture
 
   // 2d texture, level of detail 0 (normal), 3 components (red, green, blue), x size from image, y size from image,
   // border 0 (normal), rgb color data, unsigned byte data, and finally the data itself.
@@ -177,6 +193,11 @@ bool InitGL(int Width, int Height)	        // We call this right after our OpenG
   glDepthFunc(GL_LEQUAL);// Typ hloubkového testování
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);// Nejlepší perspektivní korekce
 
+  glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);// Nastavení okolního světla
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);// Nastavení přímého světla
+  glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);// Nastavení pozice světla
+  glEnable(GL_LIGHT1);// Zapne světlo
+
   return true;
 }
 
@@ -201,8 +222,9 @@ void DrawGLScene()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
   glLoadIdentity();				// Reset The View
 
-  glRotatef(rot, 0, 1, 0);
-  glTranslatef(-15.0f,-15.0f,-15.0f);
+  glTranslatef(-15.0f, -15.0f, z);
+  glRotatef(xrot, 0, 1, 0);
+  glRotatef(yrot, 1, 0, 0);
 
   //voxel::drawToe(clr);
   glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -211,7 +233,11 @@ void DrawGLScene()
   // since this is double buffered, swap the buffers to display what just got drawn.
   glutSwapBuffers();
 
-  rot += 0.4;
+  xrot += xspeed;
+  yrot += yspeed;
+  //z += zspeed;
+  //rot += 0.4;
+
 }
 
 /* The function called whenever a key is pressed. */
@@ -220,21 +246,82 @@ void keyPressed(unsigned char key, int x, int y)
   /* avoid thrashing this procedure */
   usleep(100);
 
-  /* If escape is pressed, kill everything. */
-  if (key == ESCAPE)
-  {
-    /* shut down our window */
-    glutDestroyWindow(window);
+  switch (key) {
+    case ESCAPE: // kill everything.
+      /* shut down our window */
+      glutDestroyWindow(window);
 
-    /* exit the program...normal termination. */
-    exit(0);
+      /* exit the program...normal termination. */
+      exit(1);
+      break; // redundant.
+
+    case 76:
+    case 108: // switch the lighting.
+      printf("L/l pressed; light is: %d\n", light);
+      light = light ? 0 : 1;              // switch the current value of light, between 0 and 1.
+      printf("Light is now: %d\n", light);
+      if (!light) {
+        glDisable(GL_LIGHTING);
+      } else {
+        glEnable(GL_LIGHTING);
+      }
+      break;
+
+    case 70:
+    case 102: // switch the filter.
+      printf("F/f pressed; filter is: %d\n", filter);
+      filter+=1;
+      if (filter>2) {
+        filter=0;
+      }
+      printf("Filter is now: %d\n", filter);
+      break;
+
+    default:
+      break;
+  }
+}
+
+/* The function called whenever a normal key is pressed. */
+void specialKeyPressed(int key, int x, int y)
+{
+  /* avoid thrashing this procedure */
+  usleep(100);
+
+  switch (key) {
+    case GLUT_KEY_PAGE_UP: // move the cube into the distance.
+      z-=0.02f;
+      break;
+
+    case GLUT_KEY_PAGE_DOWN: // move the cube closer.
+      z+=0.02f;
+      break;
+
+    case GLUT_KEY_UP: // decrease x rotation speed;
+      xspeed-=0.01f;
+      break;
+
+    case GLUT_KEY_DOWN: // increase x rotation speed;
+      xspeed+=0.01f;
+      break;
+
+    case GLUT_KEY_LEFT: // decrease y rotation speed;
+      yspeed-=0.01f;
+      break;
+
+    case GLUT_KEY_RIGHT: // increase y rotation speed;
+      yspeed+=0.01f;
+      break;
+
+    default:
+      break;
   }
 }
 
 int main(int argc, char **argv) 
 {
   srandom(time(0));
-  clr.noise(Colour(0.5, 1.0, 0.0), true);
+  //clr.noise(Colour(0.5, 1.0, 0.0), true);
 
   /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
      X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */
@@ -270,6 +357,9 @@ int main(int argc, char **argv)
 
   /* Register the function called when the keyboard is pressed. */
   glutKeyboardFunc(&keyPressed);
+
+  /* Register the function called when special keys (arrows, page down, etc) are pressed. */
+  glutSpecialFunc(&specialKeyPressed);
 
   /* Initialize our window. */
   InitGL(640, 480);
