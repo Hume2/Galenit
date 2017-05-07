@@ -56,7 +56,7 @@ Colour& Colour::randomize(const Colour noise, bool bound) {
 }
 
 void Colour::use() const {
-  glColor3f(r, g, b);
+  glColor4f(r, g, b, 0.5f);
 }
 
 Colour Colour::operator +(const Colour a) const {

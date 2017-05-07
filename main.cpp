@@ -189,7 +189,8 @@ bool InitGL(int Width, int Height)	        // We call this right after our OpenG
     return false;
   }
 
-  glEnable(GL_TEXTURE_2D);// Zapne mapování textur
+  //glEnable(GL_TEXTURE_2D);// Zapne mapování textur
+  glEnable(GL_BLEND);
   glDepthFunc(GL_LEQUAL);// Typ hloubkového testování
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);// Nejlepší perspektivní korekce
 
@@ -197,6 +198,9 @@ bool InitGL(int Width, int Height)	        // We call this right after our OpenG
   glLightfv(GL_LIGHT1, GL_DIFFUSE, LightDiffuse);// Nastavení přímého světla
   glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);// Nastavení pozice světla
   glEnable(GL_LIGHT1);// Zapne světlo
+
+  //glColor4f(1.0f,1.0f,1.0f,0.5f);// Plný jas, 50% alfa
+  glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
   return true;
 }
@@ -223,8 +227,8 @@ void DrawGLScene()
   glLoadIdentity();				// Reset The View
 
   glTranslatef(-15.0f, -15.0f, z);
-  glRotatef(xrot, 0, 1, 0);
-  glRotatef(yrot, 1, 0, 0);
+  glRotatef(yrot, 0, 1, 0);
+  glRotatef(xrot, 1, 0, 0);
 
   //voxel::drawToe(clr);
   glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -321,7 +325,7 @@ void specialKeyPressed(int key, int x, int y)
 int main(int argc, char **argv) 
 {
   srandom(time(0));
-  //clr.noise(Colour(0.5, 1.0, 0.0), true);
+  clr.noise(Colour(0.5, 1.0, 0.0), true);
 
   /* Initialize GLUT state - glut will take any command line arguments that pertain to it or
      X Windows - look at its documentation at http://reality.sgi.com/mjk/spec3/spec3.html */
