@@ -14,7 +14,7 @@ Chunk::Chunk() :
   toes()
 {
   for (int i = MESH-1; i >= 0; i--) {
-    toes[i] = rand() % 50 == 0;
+    toes[i] = 1;//rand() % 50 == 0;
     toes[i+32768] = toes[i];
   }
   //c_l_r.noise(Colour(0.5f, 0.5f, 0.5f), true);

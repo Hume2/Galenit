@@ -22,7 +22,7 @@
 #include "graphics/voxel.h"
 #include "mesh/chunk.h"
 
-ToeColour clr(Colour(1, 1, 1), Colour(0, 1, 0));
+ToeColour clr(Colour(1, 1, 1, 0.5), Colour(0, 1, 0, 0.5));
 Chunk ch;
 float rot = 60;
 

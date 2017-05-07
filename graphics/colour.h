@@ -9,8 +9,9 @@ class Colour
   public:
     Colour();
     Colour(float r_, float g_, float b_);
+    Colour(float r_, float g_, float b_, float a_);
 
-    float r, g, b;
+    float r, g, b, a;
 
     void cap();
 
@@ -18,11 +19,11 @@ class Colour
 
     void use() const;
 
-    Colour operator+(const Colour a) const;
-    Colour& operator+=(const Colour a);
+    Colour operator+(const Colour c) const;
+    Colour& operator+=(const Colour c);
 
-    Colour operator*(const Colour a) const;
-    Colour& operator*=(const Colour a);
+    Colour operator*(const Colour c) const;
+    Colour& operator*=(const Colour c);
 
     static std::default_random_engine generator;
 };

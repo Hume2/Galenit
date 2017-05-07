@@ -10,7 +10,8 @@ std::default_random_engine Colour::generator;
 Colour::Colour():
   r(0.0f),
   g(0.0f),
-  b(0.0f)
+  b(0.0f),
+  a(1.0f)
 {
 
 }
@@ -18,7 +19,17 @@ Colour::Colour():
 Colour::Colour(float r_, float g_, float b_):
   r(r_),
   g(g_),
-  b(b_)
+  b(b_),
+  a(1.0f)
+{
+
+}
+
+Colour::Colour(float r_, float g_, float b_, float a_):
+  r(r_),
+  g(g_),
+  b(b_),
+  a(a_)
 {
 
 }
@@ -27,10 +38,12 @@ void Colour::cap() {
   r = std::min(r, 1.0f);
   g = std::min(g, 1.0f);
   b = std::min(b, 1.0f);
+  a = std::min(a, 1.0f);
 
   r = std::max(r, 0.0f);
   g = std::max(g, 0.0f);
   b = std::max(b, 0.0f);
+  a = std::max(a, 0.0f);
 }
 
 Colour& Colour::randomize(const Colour noise, bool bound) {
@@ -56,28 +69,30 @@ Colour& Colour::randomize(const Colour noise, bool bound) {
 }
 
 void Colour::use() const {
-  glColor4f(r, g, b, 0.5f);
+  glColor4f(r, g, b, a);
 }
 
-Colour Colour::operator +(const Colour a) const {
-  return Colour(r + a.r, g + a.g, b + a.b);
+Colour Colour::operator +(const Colour c) const {
+  return Colour(r + c.r, g + c.g, b + c.b, std::min(1.0f, a + c.a));
 }
 
-Colour& Colour::operator +=(const Colour a) {
-  r += a.r;
-  g += a.g;
-  b += a.b;
+Colour& Colour::operator +=(const Colour c) {
+  r += c.r;
+  g += c.g;
+  b += c.b;
+  a = std::min(1.0f, a + c.a);
   return *this;
 }
 
-Colour Colour::operator *(const Colour a) const {
-  return Colour(r * a.r, g * a.g, b * a.b);
+Colour Colour::operator *(const Colour c) const {
+  return Colour(r * c.r, g * c.g, b * c.b, a * c.a);
 }
 
-Colour& Colour::operator *=(const Colour a) {
-  r *= a.r;
-  g *= a.g;
-  b *= a.b;
+Colour& Colour::operator *=(const Colour c) {
+  r *= c.r;
+  g *= c.g;
+  b *= c.b;
+  a *= c.a;
   return *this;
 }
 
