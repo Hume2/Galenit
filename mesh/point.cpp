@@ -12,7 +12,7 @@ Point2D::Point2D() :
   y(0)
 { }
 
-Point2D::Point2D(const double x_, const double y_) :
+Point2D::Point2D(const float x_, const float y_) :
   x(x_),
   y(y_)
 { }
@@ -34,11 +34,11 @@ Point2D Point2D::operator -(const Point2D a) const {
   return Point2D(x - a.x, y - a.y);
 }
 
-Point2D Point2D::operator *(const double a) const {
+Point2D Point2D::operator *(const float a) const {
   return Point2D(x * a, y * a);
 }
 
-Point2D Point2D::operator /(const double a) const {
+Point2D Point2D::operator /(const float a) const {
   return Point2D(x / a, y / a);
 }
 
@@ -66,13 +66,13 @@ Point2D& Point2D::operator -=(const Point2D a) {
   return *this;
 }
 
-Point2D& Point2D::operator *=(const double a) {
+Point2D& Point2D::operator *=(const float a) {
   x *= a;
   y *= a;
   return *this;
 }
 
-Point2D& Point2D::operator /=(const double a) {
+Point2D& Point2D::operator /=(const float a) {
   x /= a;
   y /= a;
   return *this;
@@ -92,7 +92,7 @@ Point3D::Point3D() :
   z(0)
 { }
 
-Point3D::Point3D(const double x_, const double y_, const double z_) :
+Point3D::Point3D(const float x_, const float y_, const float z_) :
   x(x_),
   y(y_),
   z(z_)
@@ -136,11 +136,11 @@ Point3D Point3D::operator -(const Point3D a) const {
   return Point3D(x - a.x, y - a.y, z - a.z);
 }
 
-Point3D Point3D::operator *(const double a) const {
+Point3D Point3D::operator *(const float a) const {
   return Point3D(x * a, y * a, z * a);
 }
 
-Point3D Point3D::operator /(const double a) const {
+Point3D Point3D::operator /(const float a) const {
   return Point3D(x / a, y / a, z / a);
 }
 
@@ -170,14 +170,14 @@ Point3D& Point3D::operator -=(const Point3D a) {
   return *this;
 }
 
-Point3D& Point3D::operator *=(const double a) {
+Point3D& Point3D::operator *=(const float a) {
   x *= a;
   y *= a;
   z *= a;
   return *this;
 }
 
-Point3D& Point3D::operator /=(const double a) {
+Point3D& Point3D::operator /=(const float a) {
   x /= a;
   y /= a;
   z /= a;

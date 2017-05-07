@@ -1,6 +1,7 @@
 #include "cubepos.h"
 
 #include "point.h"
+#include "toepos.h"
 
 Cubepos::Cubepos():
   x(0),
@@ -26,6 +27,14 @@ Cubepos::Cubepos(Point3D point):
 
 }
 
+Cubepos::Cubepos(Toepos point):
+  x(point.x),
+  y(point.y),
+  z(point.z)
+{
+
+}
+
 Cubepos Cubepos::operator +(const Cubepos a) const {
   return Cubepos(x + a.x, y + a.y, z + a.z);
 }
@@ -35,4 +44,27 @@ Cubepos& Cubepos::operator +=(const Cubepos a) {
   y += a.y;
   z += a.z;
   return *this;
+}
+
+Cubepos Cubepos::operator -(const Cubepos a) const {
+  return Cubepos(x - a.x, y - a.y, z - a.z);
+}
+
+Cubepos Cubepos::operator -() const {
+  return Cubepos(-x, -y, -z);
+}
+
+Cubepos& Cubepos::operator -=(const Cubepos a) {
+  x -= a.x;
+  y -= a.y;
+  z -= a.z;
+  return *this;
+}
+
+bool Cubepos::operator ==(const Cubepos a) const {
+  return (x == a.x) && (y == a.y) && (z == a.z);
+}
+
+bool Cubepos::operator !=(const Cubepos a) const {
+  return (x != a.x) || (y != a.y) || (z != a.z);
 }

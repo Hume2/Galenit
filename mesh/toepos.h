@@ -1,6 +1,7 @@
 #ifndef MESH_TOEPOS_H
 #define MESH_TOEPOS_H
 
+class Cubepos;
 class Point3D;
 
 class Toepos
@@ -12,12 +13,21 @@ class Toepos
     Toepos();
     Toepos(int x_, int y_, int z_, Mesh mesh_);
     Toepos(Point3D point);
+    Toepos(Cubepos point);
+    Toepos(Cubepos point, Mesh mesh_);
 
     int x,y,z;
     Mesh mesh;
 
     Toepos operator+(const Toepos a) const;
+    Toepos operator-(const Toepos a) const;
+    Toepos operator-() const;
+
+    bool operator==(const Toepos a) const;
+    bool operator!=(const Toepos a) const;
+
     Toepos& operator+=(const Toepos a);
+    Toepos& operator-=(const Toepos a);
 };
 
 namespace dir{

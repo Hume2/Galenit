@@ -2,6 +2,7 @@
 #define MESH_CUBEPOS_H
 
 class Point3D;
+class Toepos;
 
 class Cubepos
 {
@@ -11,11 +12,19 @@ class Cubepos
     Cubepos();
     Cubepos(int x_, int y_, int z_);
     Cubepos(Point3D point);
+    Cubepos(Toepos point);
 
     int x, y, z;
 
     Cubepos operator+(const Cubepos a) const;
+    Cubepos operator-(const Cubepos a) const;
+    Cubepos operator-() const;
+
+    bool operator==(const Cubepos a) const;
+    bool operator!=(const Cubepos a) const;
+
     Cubepos& operator+=(const Cubepos a);
+    Cubepos& operator-=(const Cubepos a);
 };
 
 

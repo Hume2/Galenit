@@ -20,14 +20,14 @@ class Matrix2D
      */
 
     Matrix2D();
-    Matrix2D(const double a_, const double b_, const double c_,
-             const double d_, const double e_, const double f_,
-             const double g_, const double h_, const double i_);
-    Matrix2D(Method method, const double x, const double y);
+    Matrix2D(const float a_, const float b_, const float c_,
+             const float d_, const float e_, const float f_,
+             const float g_, const float h_, const float i_);
+    Matrix2D(Method method, const float x, const float y);
 
-    double a, b, c;
-    double d, e, f;
-    double g, h, i;
+    float a, b, c;
+    float d, e, f;
+    float g, h, i;
 
     Matrix2D operator+(const Matrix2D x) const;
     Matrix2D operator-() const;
@@ -62,16 +62,16 @@ class Matrix3D
      */
 
     Matrix3D();
-    Matrix3D(const double a_, const double b_, const double c_, const double d_,
-             const double e_, const double f_, const double g_, const double h_,
-             const double i_, const double j_, const double k_, const double l_,
-             const double m_, const double n_, const double o_, const double p_);
-    Matrix3D(Method method, const double x, const double y, const double z);
+    Matrix3D(const float a_, const float b_, const float c_, const float d_,
+             const float e_, const float f_, const float g_, const float h_,
+             const float i_, const float j_, const float k_, const float l_,
+             const float m_, const float n_, const float o_, const float p_);
+    Matrix3D(Method method, const float x, const float y, const float z);
 
-    double a, b, c, d;
-    double e, f, g, h;
-    double i, j, k, l;
-    double m, n, o, p;
+    float a, b, c, d;
+    float e, f, g, h;
+    float i, j, k, l;
+    float m, n, o, p;
 
     Matrix3D operator+(const Matrix3D x) const;
     Matrix3D operator-() const;

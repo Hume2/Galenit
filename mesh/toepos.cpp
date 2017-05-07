@@ -1,5 +1,6 @@
 #include "toepos.h"
 
+#include "cubepos.h"
 #include "point.h"
 
 Toepos::Toepos():
@@ -56,6 +57,24 @@ Toepos::Toepos(Point3D point):
   }
 }
 
+Toepos::Toepos(Cubepos point):
+  x(point.x),
+  y(point.y),
+  z(point.z),
+  mesh(ASW)
+{
+
+}
+
+Toepos::Toepos(Cubepos point, Mesh mesh_):
+  x(point.x),
+  y(point.y),
+  z(point.z),
+  mesh(mesh_)
+{
+
+}
+
 Toepos Toepos::operator +(const Toepos a) const {
   Toepos result(x + a.x, y + a.y, z + a.z, ASW);
   if (mesh != a.mesh) {
@@ -81,4 +100,46 @@ Toepos& Toepos::operator +=(const Toepos a) {
     mesh = ASW;
   }
   return *this;
+}
+
+Toepos Toepos::operator -(const Toepos a) const {
+  Toepos result(x - a.x, y - a.y, z - a.z, ASW);
+  if (mesh != a.mesh) {
+    result.mesh = ZOT;
+    result.x--;
+    result.y--;
+    result.z--;
+  }
+  return result;
+}
+
+Toepos& Toepos::operator -=(const Toepos a) {
+  x -= a.x;
+  y -= a.y;
+  z -= a.z;
+  if (mesh != a.mesh) {
+    mesh = ZOT;
+    x--;
+    y--;
+    z--;
+  }
+  return *this;
+}
+
+Toepos Toepos::operator -() const {
+  Toepos result( -x, -y, -z, mesh);
+  if (mesh == ZOT) {
+    result.x--;
+    result.y--;
+    result.z--;
+  }
+  return result;
+}
+
+bool Toepos::operator ==(const Toepos a) const {
+  return (x == a.x) && (y == a.y) && (z == a.z) && (mesh == a.mesh);
+}
+
+bool Toepos::operator !=(const Toepos a) const {
+  return (x != a.x) || (y != a.y) || (z != a.z) || (mesh != a.mesh);
 }

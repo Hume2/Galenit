@@ -13,9 +13,9 @@ Matrix2D::Matrix2D() :
 
 }
 
-Matrix2D::Matrix2D(const double a_, const double b_, const double c_,
-                   const double d_, const double e_, const double f_,
-                   const double g_, const double h_, const double i_) :
+Matrix2D::Matrix2D(const float a_, const float b_, const float c_,
+                   const float d_, const float e_, const float f_,
+                   const float g_, const float h_, const float i_) :
   a(a_), b(b_), c(c_),
   d(d_), e(e_), f(f_),
   g(g_), h(h_), i(i_)
@@ -23,7 +23,7 @@ Matrix2D::Matrix2D(const double a_, const double b_, const double c_,
 
 }
 
-Matrix2D::Matrix2D(Method method, const double x, const double y) :
+Matrix2D::Matrix2D(Method method, const float x, const float y) :
   a(), b(), c(),
   d(), e(), f(),
   g(), h(), i()
@@ -137,10 +137,10 @@ Matrix3D::Matrix3D() :
 
 }
 
-Matrix3D::Matrix3D(const double a_, const double b_, const double c_, const double d_,
-                   const double e_, const double f_, const double g_, const double h_,
-                   const double i_, const double j_, const double k_, const double l_,
-                   const double m_, const double n_, const double o_, const double p_) :
+Matrix3D::Matrix3D(const float a_, const float b_, const float c_, const float d_,
+                   const float e_, const float f_, const float g_, const float h_,
+                   const float i_, const float j_, const float k_, const float l_,
+                   const float m_, const float n_, const float o_, const float p_) :
   a(a_), b(b_), c(c_), d(d_),
   e(e_), f(f_), g(g_), h(h_),
   i(i_), j(j_), k(k_), l(l_),
@@ -149,7 +149,7 @@ Matrix3D::Matrix3D(const double a_, const double b_, const double c_, const doub
 
 }
 
-Matrix3D::Matrix3D(Method method, const double x, const double y, const double z) :
+Matrix3D::Matrix3D(Method method, const float x, const float y, const float z) :
   a(), b(), c(), d(),
   e(), f(), g(), h(),
   i(), j(), k(), l(),
