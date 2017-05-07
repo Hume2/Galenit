@@ -73,7 +73,11 @@ bool Cuberect::collides(const Cuberect a) const {
 }
 
 bool Cuberect::is_inside(const Cubepos a) const {
-  return (a.x > p1.x && a.x < p2.x) && (a.y > p1.y && a.y < p2.y) && (a.z > p1.z && a.z < p2.z);
+  return (a.x >= p1.x && a.x < p2.x) && (a.y >= p1.y && a.y < p2.y) && (a.z >= p1.z && a.z < p2.z);
+}
+
+bool Cuberect::is_inside(const Toepos a) const {
+  return (a.x >= p1.x && a.x < p2.x) && (a.y >= p1.y && a.y < p2.y) && (a.z >= p1.z && a.z < p2.z);
 }
 
 bool Cuberect::operator ==(const Cuberect a) const {

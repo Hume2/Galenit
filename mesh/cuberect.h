@@ -23,6 +23,7 @@ class Cuberect
     Cubepos get_size() const;
     bool collides(const Cuberect a) const;
     bool is_inside(const Cubepos a) const;
+    bool is_inside(const Toepos a) const;
 
     bool operator==(const Cuberect a) const;
     bool operator!=(const Cuberect a) const;

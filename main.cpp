@@ -21,7 +21,7 @@
 
 ToeColour clr(Colour(1, 1, 1), Colour(0, 1, 0));
 Chunk ch;
-float rot = 0;
+float rot = 60;
 
 /* ascii code for the escape key */
 #define ESCAPE 27

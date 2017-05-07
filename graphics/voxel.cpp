@@ -5,7 +5,7 @@
 namespace voxel {
 
   void drawToeHexagon(char n, const ToeColour c) {
-    glScalef((n & 1) ? 1.0f : -1.0f, (n & 2) ? 1.0f : -1.0f, (n & 4) ? 1.0f : -1.0f);
+    glScalef((n & 1) ? -1.0f : 1.0f, (n & 2) ? -1.0f : 1.0f, (n & 4) ? -1.0f : 1.0f);
 
     const float v[7][3] = {
       { 0.25f, 0.25f, 0.25f},
@@ -38,7 +38,7 @@ namespace voxel {
     }
     glEnd();
 
-    glScalef((n & 1) ? 1.0f : -1.0f, (n & 2) ? 1.0f : -1.0f, (n & 4) ? 1.0f : -1.0f);
+    glScalef((n & 1) ? -1.0f : 1.0f, (n & 2) ? -1.0f : 1.0f, (n & 4) ? -1.0f : 1.0f);
   }
 
   void drawToeQuad(char n, const ToeColour c) {
