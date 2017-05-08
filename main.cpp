@@ -226,9 +226,9 @@ void DrawGLScene()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		// Clear The Screen And The Depth Buffer
   glLoadIdentity();				// Reset The View
 
+  glRotatef(yrot, 1, 0, 0);
+  glRotatef(xrot, 0, 1, 0);
   glTranslatef(-15.0f, -15.0f, z);
-  glRotatef(yrot, 0, 1, 0);
-  glRotatef(xrot, 1, 0, 0);
 
   //voxel::drawToe(clr);
   glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -290,7 +290,7 @@ void keyPressed(unsigned char key, int x, int y)
 void specialKeyPressed(int key, int x, int y)
 {
   /* avoid thrashing this procedure */
-  usleep(100);
+  usleep(10);
 
   switch (key) {
     case GLUT_KEY_PAGE_UP: // move the cube into the distance.
@@ -302,19 +302,19 @@ void specialKeyPressed(int key, int x, int y)
       break;
 
     case GLUT_KEY_UP: // decrease x rotation speed;
-      xspeed-=0.01f;
+      yrot-=1.0f;
       break;
 
     case GLUT_KEY_DOWN: // increase x rotation speed;
-      xspeed+=0.01f;
+      yrot+=1.0f;
       break;
 
     case GLUT_KEY_LEFT: // decrease y rotation speed;
-      yspeed-=0.01f;
+      xrot+=1.0f;
       break;
 
     case GLUT_KEY_RIGHT: // increase y rotation speed;
-      yspeed+=0.01f;
+      xrot-=1.0f;
       break;
 
     default:

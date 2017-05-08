@@ -54,12 +54,12 @@ namespace voxel {
     const float v[4][4] = {
       { 0.25f, 0.00f, 0.0f, 0.0f},
       { 0.00f, 0.25f, 0.0f, 1.0f},
-      {-0.25f,-0.00f, 1.0f, 1.0f},
       {-0.00f,-0.25f, 1.0f, 0.0f},
+      {-0.25f,-0.00f, 1.0f, 1.0f},
     };
     const float z = 0.50f;
 
-    glBegin(GL_QUADS);
+    glBegin(GL_TRIANGLE_STRIP);
     if (n & 1) {
       switch (n/2) {
         case 0:
